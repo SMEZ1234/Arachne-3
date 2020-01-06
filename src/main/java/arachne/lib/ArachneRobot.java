@@ -59,6 +59,12 @@ public class ArachneRobot extends RobotBase
 			}
 		}
 	}
+	
+	@Override
+	public void endCompetition() {
+		NotifierJNI.stopNotifier(notifierHandle);
+		end();
+	}
 
 	/**
 	 * Update the alarm hardware to reflect the next alarm.
@@ -115,6 +121,7 @@ public class ArachneRobot extends RobotBase
 	protected void initialize() {}
 	protected void execute(GameState state) {}
 	protected void onStateChange(GameState oldState, GameState newState) {}
+	protected void end() {}
 	
 	protected void errorFallback(Exception exception) {
 		ArachneLogger.getInstance().critical("Error from inside robot's loopFunc(): " + exception.getMessage());
