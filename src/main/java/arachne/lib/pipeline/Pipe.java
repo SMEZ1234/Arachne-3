@@ -1,24 +1,65 @@
 package arachne.lib.pipeline;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 
 import arachne.lib.io.Settable;
 
-public interface Pipe<T> extends Source<T>, Settable<T>
+public class Pipe<T> extends AbstractValve<T> implements Source<T>
 {
-	void setModifier(UnaryOperator<T> modifier);
-	void clearModifier();
+	protected Set<Settable<T>> outputs;
+	protected T value;
 	
-	boolean addFilter(Predicate<T> predicate);
-	boolean removeFilter(Predicate<T> predicate);
-	void clearFilters();
+	public Pipe() {
+		super();
+		
+		this.outputs = new LinkedHashSet<Settable<T>>();
+	}
+
+	@Override
+	public <SettableT extends Settable<T>> SettableT attachOutput(SettableT settable) {
+		outputs.add(settable);
+		return settable;
+	}
+
+	@Override
+	public boolean detachOutput(Settable<T> settable) {
+		return outputs.remove(settable);
+	}
+
+	@Override
+	public void detachAllOutputs() {
+		outputs.clear();
+	}
+
+	@Override
+	public void feedOutputs() {
+		for(Settable<T> output : outputs) output.accept(value);
+	}
+
+	@Override
+	protected void acceptValveValue(T value) {
+		this.value = value;
+		feedOutputs();
+	}
 	
-	void enableFilteredOutput(T defaultValue);
-	void disableFilteredOutput();
+	@Override
+	public Pipe<T> withModifier(UnaryOperator<T> modifier) {
+		setModifier(modifier);
+		return this;
+	}
 	
-	default void setFilter(Predicate<T> predicate) {
-		clearFilters();
-		addFilter(predicate);
+	@Override
+	public Pipe<T> withModifier(UnaryOperator<T>[] modifiers) {
+		setModifier(modifiers);
+		return this;
+	}
+	
+	@Override
+	public Pipe<T> withFilter(Predicate<T> predicate) {
+		setFilter(predicate);
+		return this;
 	}
 }

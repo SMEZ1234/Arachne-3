@@ -4,10 +4,8 @@ import java.util.function.DoubleUnaryOperator;
 
 import arachne.lib.io.SettableDouble;
 import arachne.lib.listeners.DoubleProperty;
-import arachne.lib.listeners.SimpleDoubleProperty;
 import arachne.lib.pipeline.DoublePipe;
 import arachne.lib.pipeline.DoubleSource;
-import arachne.lib.pipeline.SimpleDoublePipe;
 import arachne.lib.systems.Subsystem;
 
 public abstract class DifferentialDrivetrain extends Subsystem
@@ -25,10 +23,10 @@ public abstract class DifferentialDrivetrain extends Subsystem
 		tankSource = new TankSource();
 		arcadeSource = new ArcadeSource();
 		
-		leftOutput = new SimpleDoublePipe();
+		leftOutput = new DoublePipe();
 		leftOutput.setModifier(outputModifier);
 		
-		rightOutput = new SimpleDoublePipe();
+		rightOutput = new DoublePipe();
 		rightOutput.setModifier(outputModifier);
 	}
 
@@ -44,8 +42,8 @@ public abstract class DifferentialDrivetrain extends Subsystem
 		protected final DoublePipe leftInput, rightInput;
 		
 		protected TankSource() {
-			leftInput = new SimpleDoublePipe();
-			rightInput = new SimpleDoublePipe();
+			leftInput = new DoublePipe();
+			rightInput = new DoublePipe();
 		}
 		
 		public SettableDouble getLeftInput() {
@@ -61,8 +59,8 @@ public abstract class DifferentialDrivetrain extends Subsystem
 		protected final DoubleProperty speedInput, rotationInput;
 		
 		protected ArcadeSource() {
-			speedInput = new SimpleDoubleProperty();
-			rotationInput = new SimpleDoubleProperty();
+			speedInput = new DoubleProperty();
+			rotationInput = new DoubleProperty();
 		}
 		
 		public SettableDouble getSpeedInput() {

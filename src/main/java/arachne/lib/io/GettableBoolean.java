@@ -3,6 +3,7 @@ package arachne.lib.io;
 import java.util.function.BooleanSupplier;
 
 import arachne.lib.function.BooleanPredicate;
+import arachne.lib.logging.ArachneLogger;
 import arachne.lib.sequences.Action;
 import arachne.lib.sequences.Actionable;
 import arachne.lib.sequences.HostAction;
@@ -47,5 +48,26 @@ public interface GettableBoolean extends BooleanSupplier, Actionable
 	
 	default GettableBoolean xor(GettableBoolean other) {
 		return () -> this.get() != other.get();
+	}
+	
+	public static GettableBoolean create(GettableBoolean lambda) {
+		return lambda;
+	}
+	
+	public static final class Wrapper implements GettableBoolean {
+		protected GettableBoolean gettable;
+		
+		public Wrapper wrap(GettableBoolean gettable) {
+			this.gettable = gettable;
+			return this;
+		}
+
+		@Override
+		public boolean get() {
+			if(gettable != null) return gettable.get();
+			
+			ArachneLogger.getInstance().error("Tried to get GettableBoolean wrapper with no contained gettable, returning false");
+			return false;
+		}
 	}
 }

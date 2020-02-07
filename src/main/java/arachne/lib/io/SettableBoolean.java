@@ -5,5 +5,7 @@ import arachne.lib.function.BooleanConsumer;
 @FunctionalInterface
 public interface SettableBoolean extends BooleanConsumer
 {
-	// Empty, exists for future features
+	public static SettableBoolean create(SettableBoolean lambda) {
+		return lambda;
+	}
 }

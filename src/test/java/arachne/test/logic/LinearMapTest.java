@@ -3,10 +3,8 @@ package arachne.test.logic;
 import org.junit.jupiter.api.Test;
 
 import arachne.lib.listeners.DoubleProperty;
-import arachne.lib.listeners.SimpleDoubleProperty;
 import arachne.lib.logic.LinearMap;
 import arachne.lib.pipeline.DoublePipe;
-import arachne.lib.pipeline.SimpleDoublePipe;
 
 import static arachne.lib.logic.DoubleComparison.*;
 
@@ -21,8 +19,8 @@ public class LinearMapTest
 	
 	@BeforeEach
 	void beforeEach() {
-		input = new SimpleDoublePipe();
-		output = new SimpleDoubleProperty();
+		input = new DoublePipe();
+		output = new DoubleProperty();
 	}
 	
 	@AfterEach

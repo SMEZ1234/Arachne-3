@@ -5,7 +5,6 @@ import java.util.function.DoublePredicate;
 import arachne.lib.io.SettableBoolean;
 import arachne.lib.listeners.BooleanProperty;
 import arachne.lib.listeners.DoubleChangeHandler;
-import arachne.lib.listeners.SimpleBooleanProperty;
 import arachne.lib.logic.ArachneMath;
 
 public class SimpleDifferentialDrivetrain extends DifferentialDrivetrain
@@ -17,7 +16,7 @@ public class SimpleDifferentialDrivetrain extends DifferentialDrivetrain
 	}
 	
 	public SimpleDifferentialDrivetrain(boolean isInitiallyTankDrive, boolean squareInputs) {
-		this.isTankState = new SimpleBooleanProperty(isInitiallyTankDrive);
+		this.isTankState = new BooleanProperty(isInitiallyTankDrive);
 	}
 	
 	@Override

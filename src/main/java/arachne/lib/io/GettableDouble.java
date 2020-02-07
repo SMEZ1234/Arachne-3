@@ -4,8 +4,7 @@ import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
 import java.util.function.DoubleUnaryOperator;
 
-import edu.wpi.first.wpilibj.PIDSource;
-import edu.wpi.first.wpilibj.PIDSourceType;
+import arachne.lib.logging.ArachneLogger;
 
 @FunctionalInterface
 public interface GettableDouble extends DoubleSupplier
@@ -25,28 +24,28 @@ public interface GettableDouble extends DoubleSupplier
 		return () -> predicate.test(get());
 	}
 	
-	default GettableDouble withModifier(DoubleUnaryOperator modifier) {
+	default GettableDouble change(DoubleUnaryOperator modifier) {
 		return () -> modifier.applyAsDouble(get());
 	}
 	
-	default PIDSource asPIDSource(PIDSourceType pidSource) {
-		return new PIDSource() {
-			private PIDSourceType type = pidSource;
+	public static GettableDouble create(GettableDouble lambda) {
+		return lambda;
+	}
+	
+	public static final class Wrapper implements GettableDouble {
+		protected GettableDouble gettable;
+		
+		public Wrapper wrap(GettableDouble gettable) {
+			this.gettable = gettable;
+			return this;
+		}
+
+		@Override
+		public double get() {
+			if(gettable != null) return gettable.get();
 			
-			@Override
-			public double pidGet() {
-				return GettableDouble.this.get();
-			}
-			
-			@Override
-			public PIDSourceType getPIDSourceType() {
-				return type;
-			}
-			
-			@Override
-			public void setPIDSourceType(PIDSourceType pidSource) {
-				this.type = pidSource;
-			}
-		};
+			ArachneLogger.getInstance().error("Tried to get GettableDouble wrapper with no contained gettable, returning 0");
+			return 0;
+		}
 	}
 }

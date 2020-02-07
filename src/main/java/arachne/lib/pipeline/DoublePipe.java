@@ -1,24 +1,101 @@
 package arachne.lib.pipeline;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleUnaryOperator;
 
 import arachne.lib.io.SettableDouble;
+import edu.wpi.first.wpilibj.SpeedController;
 
-public interface DoublePipe extends DoubleSource, SettableDouble
+public class DoublePipe extends AbstractDoubleValve implements DoubleSource
 {
-	void setModifier(DoubleUnaryOperator modifier);
-	void clearModifier();
+	protected Set<SettableDouble> outputs;
+	protected double value;
 	
-	boolean addFilter(DoublePredicate predicate);
-	boolean removeFilter(DoublePredicate predicate);
-	void clearFilters();
+	public DoublePipe() {
+		super();
+		
+		this.outputs = new LinkedHashSet<SettableDouble>();
+	}
+
+	@Override
+	public <SettableT extends SettableDouble> SettableT attachOutput(SettableT settable) {
+		outputs.add(settable);
+		return settable;
+	}
+
+	@Override
+	public boolean detachOutput(SettableDouble settable) {
+		return outputs.remove(settable);
+	}
+
+	@Override
+	public void detachAllOutputs() {
+		outputs.clear();
+	}
+
+	@Override
+	public void feedOutputs() {
+		for(SettableDouble output : outputs) output.accept(value);
+	}
+
+	@Override
+	protected void acceptValveValue(double value) {
+		this.value = value;
+		feedOutputs();
+	}
 	
-	void enableFilteredOutput(double defaultValue);
-	void disableFilteredOutput();
+	@Override
+	public DoublePipe withModifier(DoubleUnaryOperator modifier, DoubleUnaryOperator... additionalModifiers) {
+		setModifier(modifier, additionalModifiers);
+		return this;
+	}
 	
-	default void setFilter(DoublePredicate predicate) {
-		clearFilters();
-		addFilter(predicate);
+	@Override
+	public DoublePipe withFilter(DoublePredicate predicate) {
+		setFilter(predicate);
+		return this;
+	}
+	
+	public SpeedController asSpeedController() {
+		return new SpeedController() {
+			private boolean isInverted = false;
+			
+			@Override
+			public double get() {
+				return DoublePipe.this.value;
+			}
+			
+			@Override
+			public void set(double speed) {
+				DoublePipe.this.accept(isInverted ? -speed : speed);
+			}
+			
+			@Override
+			public void pidWrite(double output) {
+				DoublePipe.this.accept(output);
+			}
+			
+			@Override
+			public boolean getInverted() {
+				return isInverted;
+			}
+			
+			@Override
+			public void setInverted(boolean isInverted) {
+				this.isInverted = isInverted;
+			}
+			
+			@Override
+			public void disable() {
+				DoublePipe.this.accept(0);
+			}
+			
+			@Override
+			public void stopMotor() {
+				disable();
+			}
+		};
 	}
 }

@@ -5,17 +5,15 @@ import java.util.Set;
 
 import arachne.lib.function.BooleanPredicate;
 
-public class SimpleBooleanPipe extends AbstractBooleanSource implements BooleanPipe
+public abstract class AbstractBooleanValve implements BooleanValve
 {
 	protected BooleanPredicate modifier;
 	protected Set<BooleanPredicate> filters;
-
-	protected boolean value;
 	
 	protected boolean hasDefaultValue;
 	protected boolean defaultValue;
 	
-	public SimpleBooleanPipe() {
+	public AbstractBooleanValve() {
 		super();
 		
 		this.filters = new LinkedHashSet<BooleanPredicate>();		
@@ -33,15 +31,13 @@ public class SimpleBooleanPipe extends AbstractBooleanSource implements BooleanP
 			}
 		}
 		
-		this.value = passesFilters ? value : defaultValue;
-		
-		if(passesFilters || hasDefaultValue) feedOutputs();
+		if(passesFilters || hasDefaultValue) {
+			value = modifier != null ? modifier.test(value) : value;
+			acceptValveValue(passesFilters ? value : defaultValue);
+		}
 	}
-
-	@Override
-	protected boolean getOutputValue() {
-		return modifier != null ? modifier.test(value) : value;
-	}
+	
+	protected abstract void acceptValveValue(boolean value);
 
 	@Override
 	public void setModifier(BooleanPredicate modifier) {

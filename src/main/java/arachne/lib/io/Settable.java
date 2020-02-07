@@ -5,5 +5,7 @@ import java.util.function.Consumer;
 @FunctionalInterface
 public interface Settable<T> extends Consumer<T>
 {
-	// Empty, exists for future features
+	public static <T> Settable<T> create(Settable<T> lambda) {
+		return lambda;
+	}
 }

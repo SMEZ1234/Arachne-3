@@ -5,17 +5,15 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 
-public class SimplePipe<T> extends AbstractSource<T> implements Pipe<T>
+public abstract class AbstractValve<T> implements Valve<T>
 {
 	protected UnaryOperator<T> modifier;
 	protected Set<Predicate<T>> filters;
 	
-	protected T value;
-	
 	protected boolean hasDefaultValue;
 	protected T defaultValue;
 	
-	public SimplePipe() {
+	public AbstractValve() {
 		super();
 		
 		this.filters = new LinkedHashSet<Predicate<T>>();		
@@ -33,15 +31,13 @@ public class SimplePipe<T> extends AbstractSource<T> implements Pipe<T>
 			}
 		}
 		
-		this.value = passesFilters ? value : defaultValue;
-		
-		if(passesFilters || hasDefaultValue) feedOutputs();
+		if(passesFilters || hasDefaultValue) {
+			value = modifier != null ? modifier.apply(value) : value;
+			acceptValveValue(passesFilters ? value : defaultValue);
+		}
 	}
-
-	@Override
-	protected T getOutputValue() {
-		return modifier != null ? modifier.apply(value) : value;
-	}
+	
+	protected abstract void acceptValveValue(T value);
 
 	@Override
 	public void setModifier(UnaryOperator<T> modifier) {

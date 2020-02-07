@@ -5,19 +5,15 @@ import java.util.Set;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleUnaryOperator;
 
-import edu.wpi.first.wpilibj.SpeedController;
-
-public class SimpleDoublePipe extends AbstractDoubleSource implements DoublePipe
+public abstract class AbstractDoubleValve implements DoubleValve
 {
 	protected DoubleUnaryOperator modifier;
 	protected Set<DoublePredicate> filters;
-
-	protected double value;
 	
 	protected boolean hasDefaultValue;
 	protected double defaultValue;
 	
-	public SimpleDoublePipe() {
+	public AbstractDoubleValve() {
 		super();
 		
 		this.filters = new LinkedHashSet<DoublePredicate>();		
@@ -35,15 +31,13 @@ public class SimpleDoublePipe extends AbstractDoubleSource implements DoublePipe
 			}
 		}
 		
-		this.value = passesFilters ? value : defaultValue;
-		
-		if(passesFilters || hasDefaultValue) feedOutputs();
+		if(passesFilters || hasDefaultValue) {
+			value = modifier != null ? modifier.applyAsDouble(value) : value;
+			acceptValveValue(passesFilters ? value : defaultValue);
+		}
 	}
-
-	@Override
-	protected double getOutputValue() {
-		return modifier != null ? modifier.applyAsDouble(value) : value;
-	}
+	
+	protected abstract void acceptValveValue(double value);
 
 	@Override
 	public void setModifier(DoubleUnaryOperator modifier) {
@@ -79,46 +73,5 @@ public class SimpleDoublePipe extends AbstractDoubleSource implements DoublePipe
 	@Override
 	public void disableFilteredOutput() {
 		this.hasDefaultValue = false;
-	}
-	
-	public SpeedController asSpeedController() {
-		return new SpeedController() {
-			private boolean isInverted = false;
-			
-			@Override
-			public double get() {
-				return value;
-			}
-			
-			@Override
-			public void set(double speed) {
-				SimpleDoublePipe.this.accept(isInverted ? -speed : speed);
-			}
-			
-			@Override
-			public void pidWrite(double output) {
-				SimpleDoublePipe.this.pidWrite(output);
-			}
-			
-			@Override
-			public boolean getInverted() {
-				return isInverted;
-			}
-			
-			@Override
-			public void setInverted(boolean isInverted) {
-				this.isInverted = isInverted;
-			}
-			
-			@Override
-			public void disable() {
-				SimpleDoublePipe.this.accept(0);
-			}
-			
-			@Override
-			public void stopMotor() {
-				disable();
-			}
-		};
 	}
 }
