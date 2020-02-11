@@ -1,14 +1,15 @@
-package arachne.lib.pipeline;
+package arachne.lib.pipeline.translators;
 
 import arachne.lib.function.BooleanFunction;
 import arachne.lib.io.SettableBoolean;
+import arachne.lib.pipeline.AbstractSource;
 
-public class BooleanTranslator<R> extends AbstractSource<R> implements SettableBoolean
+public class FromBooleanTranslator<R> extends AbstractSource<R> implements SettableBoolean
 {
 	protected R value;
 	protected final BooleanFunction<R> translation;
 	
-	public BooleanTranslator(BooleanFunction<R> translation) {
+	public FromBooleanTranslator(BooleanFunction<R> translation) {
 		this.translation = translation;
 	}
 

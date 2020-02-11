@@ -1,8 +1,9 @@
-package arachne.lib.pipeline;
+package arachne.lib.pipeline.translators;
 
 import java.util.function.Function;
 
 import arachne.lib.io.Settable;
+import arachne.lib.pipeline.AbstractSource;
 
 public class Translator<T, R> extends AbstractSource<R> implements Settable<T>
 {
