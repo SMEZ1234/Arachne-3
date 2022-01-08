@@ -1,0 +1,36 @@
+{
+    "file": "Listener",
+    "dest": "../src/main/java/arachne/lib/pipeline",
+    "forms": [
+        {
+            "label": "Generic",
+            "filename": "Listener",
+            "imports": [],
+            "javadoc": {},
+            "variables": {
+                "Listener": "Listener<T>",
+                "T": "T"
+            }
+        },
+        {
+            "label": "Boolean",
+            "filename": "BooleanListener",
+            "imports": [],
+            "javadoc": {},
+            "variables": {
+                "Listener": "BooleanListener",
+                "T": "boolean"
+            }
+        },
+        {
+            "label": "Double",
+            "filename": "DoubleListener",
+            "imports": [],
+            "javadoc": {},
+            "variables": {
+                "Listener": "DoubleListener",
+                "T": "double"
+            }
+        }
+    ]
+}

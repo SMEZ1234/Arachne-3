@@ -1,0 +1,119 @@
+{
+    "file": "Sink",
+    "dest": "../src/main/java/arachne/lib/pipeline",
+    "forms": [
+        {
+            "label": "Generic",
+            "filename": "Sink",
+            "imports": [
+                "java.util.function.Predicate",
+                "java.util.function.UnaryOperator",
+                "",
+                "arachne.lib.io.Gettable",
+                "arachne.lib.io.Settable"
+            ],
+            "javadoc": {
+                "Class": {
+                    "lines": [
+                        "A Sink holds a value. When the Sink accepts a new value, that value may be",
+                        "tested to match a {@link Predicate} filter then modified using a",
+                        "{@link UnaryOperator}, and the resultant value becomes the new value of the Sink.",
+                        "",
+                        "@param <T> The type of the value held by the Sink."
+                    ],
+                    "indents": 0
+                }
+            },
+            "variables": {
+                "T": "T",
+                "Sink": "Sink<T>",
+                "ClassName": "Sink",
+
+                "Gettable": "Gettable<T>",
+                "Settable": "Settable<T>",
+
+                "Filter": "Predicate<T>",
+                "FilterClassName": "Predicate",
+
+                "Modifier": "UnaryOperator<T>",
+                "ModifierClassName": "UnaryOperator",
+                "applyModifier": "apply",
+
+                "identity": "UnaryOperator.identity()",
+                "TautologyParam": "<T> "
+            }
+        },
+        {
+            "label": "Boolean",
+            "filename": "BooleanSink",
+            "imports": [
+                "arachne.lib.function.BooleanPredicate",
+                "arachne.lib.io.GettableBoolean",
+                "arachne.lib.io.SettableBoolean"
+            ],
+            "javadoc": {
+                "Class": {
+                    "lines": [
+                        "A primitive type specialization of {@link Sink} for {@code $T$}."
+                    ],
+                    "indents": 0
+                }
+            },
+            "variables": {
+                "T": "boolean",
+                "Sink": "BooleanSink",
+                "ClassName": "BooleanSink",
+
+                "Gettable": "GettableBoolean",
+                "Settable": "SettableBoolean",
+
+                "Filter": "BooleanPredicate",
+                "FilterClassName": "BooleanPredicate",
+
+                "Modifier": "BooleanPredicate",
+                "ModifierClassName": "BooleanPredicate",
+                "applyModifier": "test",
+
+                "identity": "identity()",
+                "TautologyParam": ""
+            }
+        },
+        {
+            "label": "Double",
+            "filename": "DoubleSink",
+            "imports": [
+                "java.util.function.DoublePredicate",
+                "java.util.function.DoubleUnaryOperator",
+                "",
+                "arachne.lib.io.GettableDouble",
+                "arachne.lib.io.SettableDouble"
+            ],
+            "javadoc": {
+                "Class": {
+                    "lines": [
+                        "A primitive type specialization of {@link Sink} for {@code $T$}."
+                    ],
+                    "indents": 0
+                }
+            },
+            "variables": {
+                "T": "double",
+                "Sink": "DoubleSink",
+                "ClassName": "DoubleSink",
+
+                "Gettable": "GettableDouble",
+                "Settable": "SettableDouble",
+
+                "Filter": "DoublePredicate",
+                "FilterClassName": "DoublePredicate",
+
+                "Modifier": "DoubleUnaryOperator",
+                "ModifierClassName": "DoubleUnaryOperator",
+                "applyModifier": "applyAsDouble",
+
+                "identity": "DoubleUnaryOperator.identity()",
+                "TautologyParam": ""
+            }
+        }
+    ]
+}

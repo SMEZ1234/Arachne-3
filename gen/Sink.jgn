@@ -1,0 +1,136 @@
+package arachne.lib.pipeline;
+
+#imports
+import arachne.lib.logging.ArachneLogger;
+
+/**
+#javadoc Class
+ *
+ * @author Sean Zammit
+ */
+public class $Sink$ implements $Gettable$, $Settable$
+{
+	protected $T$ value;
+
+	protected $Filter$ filter;
+	protected $Modifier$ modifier;
+
+	/**
+	 * Constructor for a $ClassName$.
+	 *
+	 * @param initialValue The initial value held by the $ClassName$.
+	 */
+	public $ClassName$($T$ initialValue) {
+		this.value = initialValue;
+
+		this.filter = tautology();
+		this.modifier = $identity$;
+	}
+
+	/**
+	 * Get the current value held by the $ClassName$.
+	 */
+	@Override
+	public $T$ get() {
+		return value;
+	}
+
+	/**
+	 * Accept a new value. If the new value passes the $ClassName$'s filter, then it
+	 * will be passed through the modifier and the $ClassName$'s value will be changed
+	 * to the result.
+	 */
+	@Override
+	public void accept($T$ value) {
+		if(filter.test(value)) overwriteValue(modifier.$applyModifier$(value));
+	}
+
+	/**
+	 * Overwrite the value stored in the $ClassName$.
+	 *
+	 * @param value The new value to store.
+	 *
+	 * @return The previous value that was stored.
+	 */
+	protected $T$ overwriteValue($T$ value) {
+		$T$ oldValue = this.value;
+		this.value = value;
+
+		return oldValue;
+	}
+
+	/**
+	 * Set the modifier to be applied to values accepted by the $ClassName$.
+	 *
+	 * @param modifier The modifier to apply. Should not be null.
+	 *
+	 * @return The modifier applied.
+	 */
+	public $Sink$ setModifier($Modifier$ modifier) {
+		if(modifier == null) {
+			ArachneLogger.getInstance().error("Tried to set $ClassName$ modifier to null... changing to identity instead");
+
+			this.modifier = $identity$;
+			return this;
+		}
+
+		this.modifier = modifier;
+		return this;
+	}
+
+	/**
+	 * Clear the modifier applied to values accepted by the $ClassName$.
+	 */
+	public void clearModifier() {
+		this.modifier = $identity$;
+	}
+
+	/**
+	 * Set the filter used to test values accepted by the $ClassName$.
+	 *
+	 * @param filter The filter to apply. Should not be null.
+	 *
+	 * @return The filter applied.
+	 */
+	public $Sink$ setFilter($Filter$ filter) {
+		if(filter == null) {
+			ArachneLogger.getInstance().error("Tried to set $ClassName$ filter to null... changing to tautology instead");
+
+			this.filter = tautology();
+			return this;
+		}
+
+		this.filter = filter;
+		return this;
+	}
+
+	/**
+	 * Clear the filter testing values accepted by the $ClassName$.
+	 */
+	public void clearFilter() {
+		this.filter = tautology();
+	}
+
+#if Boolean
+	/**
+	 * Static helper function to return an identity for modifying.
+	 *
+	 * @return A $ModifierClassName$ that returns the input value.
+	 */
+	protected static $Modifier$ identity() {
+		return (value) -> value;
+	}
+#endif
+	/**
+	 * Static helper function to return a tautology for filtering.
+	 *
+#if Generic
+	 * @param $TautologyParam$The type of values tested by the $FilterClassName$.
+	 *
+#endif
+	 * @return A $FilterClassName$ that always returns true.
+	 */
+	protected static $TautologyParam$$Filter$ tautology() {
+		return (value) -> true;
+	}
+}

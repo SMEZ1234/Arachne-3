@@ -1,0 +1,67 @@
+package arachne.lib.pipeline;
+
+import java.util.HashSet;
+import java.util.Set;
+
+#imports
+
+public class $Pipe$ extends $Sink$ implements $Source$
+{
+	protected final Set<$Settable$> outputs;
+	protected final Set<$Listener$> listeners;
+
+	public $ClassName$($T$ initialValue) {
+		super(initialValue);
+
+		this.outputs = new HashSet<$Settable$>();
+		this.listeners = new HashSet<$Listener$>();
+	}
+
+	@Override
+	protected $T$ overwriteValue($T$ value) {
+		$T$ oldValue = super.overwriteValue(value);
+
+		for($Settable$ output : outputs) output.accept(value);
+		for($Listener$ listener : listeners) listener.onChange(oldValue, value);
+
+		return oldValue;
+	}
+
+	@Override
+	public $Pipe$ setModifier($Modifier$ modifier) {
+		return ($Pipe$) super.setModifier(modifier);
+	}
+
+	@Override
+	public $Pipe$ setFilter($Filter$ filter) {
+		return ($Pipe$) super.setFilter(filter);
+	}
+
+	@Override
+	public <SettableT extends $Settable$> SettableT attach(SettableT settable) {
+		outputs.add(settable);
+		return settable;
+	}
+
+	@Override
+	public <ListenerT extends $Listener$> ListenerT attachListener(ListenerT listener) {
+		listeners.add(listener);
+		return listener;
+	}
+
+	@Override
+	public boolean detach($Settable$ settable) {
+		return outputs.remove(settable);
+	}
+
+	@Override
+	public boolean detachListener($Listener$ listener) {
+		return listeners.remove(listener);
+	}
+
+	@Override
+	public void detachAll() {
+		outputs.clear();
+		listeners.clear();
+	}
+}

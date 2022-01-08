@@ -1,0 +1,11 @@
+package arachne.lib.io;
+
+#imports
+
+@FunctionalInterface
+public interface $Settable$ extends $Consumer$
+{
+	public static $CreateParam$$Settable$ create($Settable$ lambda) {
+		return lambda;
+	}
+}

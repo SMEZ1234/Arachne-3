@@ -1,0 +1,213 @@
+{
+    "file": "Translator",
+    "dest": "../src/main/java/arachne/lib/pipeline/translators",
+    "forms": [
+        {
+            "label": "GenericToGeneric",
+            "filename": "Translator",
+            "imports": [
+                "java.util.function.Function",
+                "",
+                "arachne.lib.io.Settable",
+                "arachne.lib.pipeline.Listener",
+                "arachne.lib.pipeline.Pipe",
+                "arachne.lib.pipeline.Source"
+            ],
+            "javadoc": {},
+            "variables": {
+                "Translator": "Translator<InputT, OutputT>",
+                "ClassName": "Translator",
+
+                "Translation": "Function<InputT, OutputT>",
+                "applyTranslation": "apply",
+
+                "InputT": "InputT",
+                "SettableIn": "Settable<InputT>",
+
+                "OutputT": "OutputT",
+                "SettableOut": "Settable<OutputT>",
+                "Source": "Source<OutputT>",
+                "Pipe": "Pipe<OutputT>",
+                "Listener": "Listener<OutputT>"
+            }
+        },
+        {
+            "label": "GenericToBoolean",
+            "filename": "ToBooleanTranslator",
+            "imports": [
+                "java.util.function.Predicate",
+                "",
+                "arachne.lib.io.Settable",
+                "arachne.lib.io.SettableBoolean",
+                "arachne.lib.pipeline.BooleanListener",
+                "arachne.lib.pipeline.BooleanSource",
+                "arachne.lib.pipeline.BooleanPipe"
+            ],
+            "javadoc": {},
+            "variables": {
+                "Translator": "ToBooleanTranslator<InputT>",
+                "ClassName": "ToBooleanTranslator",
+
+                "Translation": "Predicate<InputT>",
+                "applyTranslation": "test",
+
+                "InputT": "InputT",
+                "SettableIn": "Settable<InputT>",
+
+                "OutputT": "boolean",
+                "SettableOut": "SettableBoolean",
+                "Source": "BooleanSource",
+                "Pipe": "BooleanPipe",
+                "Listener": "BooleanListener"
+            }
+        },
+        {
+            "label": "GenericToDouble",
+            "filename": "ToDoubleTranslator",
+            "imports": [
+                "java.util.function.ToDoubleFunction",
+                "",
+                "arachne.lib.io.Settable",
+                "arachne.lib.io.SettableDouble",
+                "arachne.lib.pipeline.DoubleListener",
+                "arachne.lib.pipeline.DoubleSource",
+                "arachne.lib.pipeline.DoublePipe"
+            ],
+            "javadoc": {},
+            "variables": {
+                "Translator": "ToDoubleTranslator<InputT>",
+                "ClassName": "ToDoubleTranslator",
+
+                "Translation": "ToDoubleFunction<InputT>",
+                "applyTranslation": "applyAsDouble",
+
+                "InputT": "InputT",
+                "SettableIn": "Settable<InputT>",
+
+                "OutputT": "double",
+                "SettableOut": "SettableDouble",
+                "Source": "DoubleSource",
+                "Pipe": "DoublePipe",
+                "Listener": "DoubleListener"
+            }
+        },
+        {
+            "label": "BooleanToGeneric",
+            "filename": "FromBooleanTranslator",
+            "imports": [
+                "arachne.lib.function.BooleanFunction",
+                "arachne.lib.io.Settable",
+                "arachne.lib.io.SettableBoolean",
+                "arachne.lib.pipeline.Listener",
+                "arachne.lib.pipeline.Pipe",
+                "arachne.lib.pipeline.Source"
+            ],
+            "javadoc": {},
+            "variables": {
+                "Translator": "FromBooleanTranslator<OutputT>",
+                "ClassName": "FromBooleanTranslator",
+
+                "Translation": "BooleanFunction<OutputT>",
+                "applyTranslation": "apply",
+
+                "InputT": "boolean",
+                "SettableIn": "SettableBoolean",
+
+                "OutputT": "OutputT",
+                "SettableOut": "Settable<OutputT>",
+                "Source": "Source<OutputT>",
+                "Pipe": "Pipe<OutputT>",
+                "Listener": "Listener<OutputT>"
+            }
+        },
+        {
+            "label": "DoubleToGeneric",
+            "filename": "FromDoubleTranslator",
+            "imports": [
+                "java.util.function.DoubleFunction",
+                "",
+                "arachne.lib.io.Settable",
+                "arachne.lib.io.SettableDouble",
+                "arachne.lib.pipeline.Listener",
+                "arachne.lib.pipeline.Pipe",
+                "arachne.lib.pipeline.Source"
+            ],
+            "javadoc": {},
+            "variables": {
+                "Translator": "FromDoubleTranslator<OutputT>",
+                "ClassName": "FromDoubleTranslator",
+
+                "Translation": "DoubleFunction<OutputT>",
+                "applyTranslation": "apply",
+
+                "InputT": "double",
+                "SettableIn": "SettableDouble",
+
+                "OutputT": "OutputT",
+                "SettableOut": "Settable<OutputT>",
+                "Source": "Source<OutputT>",
+                "Pipe": "Pipe<OutputT>",
+                "Listener": "Listener<OutputT>"
+            }
+        },
+        {
+            "label": "BooleanToDouble",
+            "filename": "BooleanToDoubleTranslator",
+            "imports": [
+                "arachne.lib.function.BooleanToDoubleFunction",
+                "arachne.lib.io.SettableBoolean",
+                "arachne.lib.io.SettableDouble",
+                "arachne.lib.pipeline.DoubleListener",
+                "arachne.lib.pipeline.DoubleSource",
+                "arachne.lib.pipeline.DoublePipe"
+            ],
+            "javadoc": {},
+            "variables": {
+                "Translator": "BooleanToDoubleTranslator",
+                "ClassName": "BooleanToDoubleTranslator",
+
+                "Translation": "BooleanToDoubleFunction",
+                "applyTranslation": "apply",
+
+                "InputT": "boolean",
+                "SettableIn": "SettableBoolean",
+
+                "OutputT": "double",
+                "SettableOut": "SettableDouble",
+                "Source": "DoubleSource",
+                "Pipe": "DoublePipe",
+                "Listener": "DoubleListener"
+            }
+        },
+        {
+            "label": "DoubleToBoolean",
+            "filename": "DoubleToBooleanTranslator",
+            "imports": [
+                "java.util.function.DoublePredicate",
+                "",
+                "arachne.lib.io.SettableBoolean",
+                "arachne.lib.io.SettableDouble",
+                "arachne.lib.pipeline.BooleanListener",
+                "arachne.lib.pipeline.BooleanSource",
+                "arachne.lib.pipeline.BooleanPipe"
+            ],
+            "javadoc": {},
+            "variables": {
+                "Translator": "DoubleToBooleanTranslator",
+                "ClassName": "DoubleToBooleanTranslator",
+
+                "Translation": "DoublePredicate",
+                "applyTranslation": "test",
+
+                "InputT": "double",
+                "SettableIn": "SettableDouble",
+
+                "OutputT": "boolean",
+                "SettableOut": "SettableBoolean",
+                "Source": "BooleanSource",
+                "Pipe": "BooleanPipe",
+                "Listener": "BooleanListener"
+            }
+        }
+    ]
+}

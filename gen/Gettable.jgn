@@ -1,0 +1,70 @@
+package arachne.lib.io;
+
+#imports
+
+@FunctionalInterface
+public interface $Gettable$ extends $Supplier$#if Boolean
+, Actionable#endif
+
+{
+#if Boolean
+	GettableBoolean TRUE = () -> true, FALSE = () -> false;
+
+#endif
+#ifn Generic
+	$T$ get();
+
+	@Override
+	default $T$ $supplierGet$() {
+		return get();
+	}
+
+#endif
+#if Boolean
+	@Override
+	default Action asAction(HostAction host) {
+		return new Action(host) {
+			@Override
+			protected boolean isFinished() {
+				return GettableBoolean.this.get();
+			}
+		};
+	}
+
+#endif
+	default GettableBoolean is($T$ target) {
+		return () -> get() == target;
+	}
+
+	default GettableBoolean is($Predicate$ predicate) {
+		return () -> predicate.test(get());
+	}
+
+#ifn Boolean
+	default $Gettable$ change($UnaryOperator$ modifier) {
+		return () -> modifier.$applyUnaryOperator$(get());
+	}
+
+#endif
+#if Boolean
+	default $Gettable$ and($Gettable$ other) {
+		return () -> this.get() && other.get();
+	}
+
+	default $Gettable$ or($Gettable$ other) {
+		return () -> this.get() || other.get();
+	}
+
+	default $Gettable$ xor($Gettable$ other) {
+		return () -> this.get() != other.get();
+	}
+
+	default BooleanPredicate toPredicate() {
+		return (value) -> get();
+	}
+
+#endif
+	public static $CreateParam$$Gettable$ create($Gettable$ lambda) {
+		return lambda;
+	}
+}

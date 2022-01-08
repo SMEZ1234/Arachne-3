@@ -1,0 +1,83 @@
+{
+    "file": "ScheduledSource",
+    "dest": "../src/main/java/arachne/lib/scheduler",
+    "forms": [
+        {
+            "label": "Generic",
+            "filename": "ScheduledSource",
+            "imports": [
+                "arachne.lib.io.Gettable",
+                "arachne.lib.io.Settable",
+                "arachne.lib.pipeline.Listener",
+                "arachne.lib.pipeline.Pipe",
+                "arachne.lib.pipeline.Source",
+                "arachne.lib.pipeline.filters.ChangedFilter"
+            ],
+            "javadoc": {},
+            "variables": {
+                "T": "T",
+                "ScheduledSource": "ScheduledSource<T>",
+                "ClassName": "ScheduledSource",
+
+                "Source": "Source<T>",
+                "Pipe": "Pipe<T>",
+                "Gettable": "Gettable<T>",
+                "Settable": "Settable<T>",
+                "Listener": "Listener<T>",
+                "ChangedFilter": "ChangedFilter<T>"
+            }
+        },
+        {
+            "label": "Boolean",
+            "filename": "ScheduledBooleanSource",
+            "imports": [
+                "arachne.lib.io.GettableBoolean",
+                "arachne.lib.io.SettableBoolean",
+                "arachne.lib.pipeline.BooleanListener",
+                "arachne.lib.pipeline.BooleanPipe",
+                "arachne.lib.pipeline.BooleanSource",
+                "arachne.lib.pipeline.filters.ChangedBooleanFilter",
+                "arachne.lib.sequences.actions.Action",
+                "arachne.lib.sequences.actions.HostAction"
+            ],
+            "javadoc": {},
+            "variables": {
+                "T": "boolean",
+                "ScheduledSource": "ScheduledBooleanSource",
+                "ClassName": "ScheduledBooleanSource",
+                
+                "Source": "BooleanSource",
+                "Pipe": "BooleanPipe",
+                "Gettable": "GettableBoolean",
+                "Settable": "SettableBoolean",
+                "Listener": "BooleanListener",
+                "ChangedFilter": "ChangedBooleanFilter"
+            }
+        },
+        {
+            "label": "Double",
+            "filename": "ScheduledDoubleSource",
+            "imports": [
+                "arachne.lib.io.GettableDouble",
+                "arachne.lib.io.SettableDouble",
+                "arachne.lib.pipeline.DoubleListener",
+                "arachne.lib.pipeline.DoublePipe",
+                "arachne.lib.pipeline.DoubleSource",
+                "arachne.lib.pipeline.filters.ChangedDoubleFilter"
+            ],
+            "javadoc": {},
+            "variables": {
+                "T": "double",
+                "ScheduledSource": "ScheduledDoubleSource",
+                "ClassName": "ScheduledDoubleSource",
+                
+                "Source": "DoubleSource",
+                "Pipe": "DoublePipe",
+                "Gettable": "GettableDouble",
+                "Settable": "SettableDouble",
+                "Listener": "DoubleListener",
+                "ChangedFilter": "ChangedDoubleFilter"
+            }
+        }
+    ]
+}

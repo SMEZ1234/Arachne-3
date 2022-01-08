@@ -1,0 +1,58 @@
+package arachne.lib.pipeline;
+
+#imports
+
+import arachne.lib.listeners.ReadOnlySignal;
+import arachne.lib.listeners.Signal;
+
+public interface $Source$ extends $Gettable$
+{
+	<SettableT extends $Settable$> SettableT attach(SettableT settable);
+	<ListenerT extends $Listener$> ListenerT attachListener(ListenerT listener);
+
+	boolean detach($Settable$ settable);
+	boolean detachListener($Listener$ listener);
+	void detachAll();
+
+	default <U> Source<U> attachTranslator($ToGenericFunction$ translation) {
+		return attach(new $ToGenericTranslator$(get(), translation));
+	}
+
+#ifn Boolean
+	default BooleanSource attachTranslatorToBoolean($Predicate$ translation) {
+		return attach(new $ToBooleanTranslator$(get(), translation));
+	}
+
+#endif
+#ifn Double
+	default DoubleSource attachTranslatorToDouble($ToDoubleFunction$ translation) {
+		return attach(new $ToDoubleTranslator$(get(), translation));
+	}
+
+#endif
+#if Boolean
+	default ReadOnlySignal toSignal() {
+		return toSignalIf((value) -> value);
+	}
+
+#endif
+	default ReadOnlySignal toSignalIf($Predicate$ condition) {
+		Signal signal = new Signal();
+
+		attach((value) -> {
+			if(condition.test(value)) signal.fire();
+		});
+
+		return signal;
+	}
+
+	default ReadOnlySignal toSignalIf($BiPredicate$ condition) {
+		Signal signal = new Signal();
+
+		attachListener((oldValue, newValue) -> {
+			if(condition.test(oldValue, newValue)) signal.fire();
+		});
+
+		return signal;
+	}
+}

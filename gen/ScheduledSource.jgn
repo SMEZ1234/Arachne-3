@@ -1,0 +1,57 @@
+package arachne.lib.scheduler;
+
+#imports
+
+public class $ScheduledSource$ implements Schedulable, $Source$
+{
+	protected final $Gettable$ target;
+	protected final $Pipe$ pipe;
+
+	public $ClassName$($T$ initialValue, $Gettable$ target) {
+		this.target = target;
+
+		this.pipe = new $Pipe$(initialValue);
+		this.pipe.setFilter(new $ChangedFilter$());
+	}
+
+	public void run() {
+		pipe.accept(target.get());
+	}
+
+	@Override
+	public $T$ get() {
+		return pipe.get();
+	}
+
+	@Override
+	public <SettableT extends $Settable$> SettableT attach(SettableT settable) {
+		return pipe.attach(settable);
+	}
+
+	@Override
+	public <ListenerT extends $Listener$> ListenerT attachListener(ListenerT listener) {
+		return pipe.attachListener(listener);
+	}
+
+	@Override
+	public boolean detach($Settable$ settable) {
+		return pipe.detach(settable);
+	}
+
+	@Override
+	public boolean detachListener($Listener$ listener) {
+		return pipe.detachListener(listener);
+	}
+
+	@Override
+	public void detachAll() {
+		pipe.detachAll();
+	}
+#if Boolean
+
+	@Override
+	public Action asAction(HostAction host) {
+		return Schedulable.super.asAction(host);
+	}
+#endif
+}

@@ -1,0 +1,13 @@
+{
+    "file": "",
+    "dest": "../src/main/java/arachne/lib/?",
+    "forms": [
+        {
+            "label": "",
+            "filename": "",
+            "imports": [],
+            "javadoc": {},
+            "variables": {}
+        }
+    ]
+}

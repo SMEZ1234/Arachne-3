@@ -1,0 +1,70 @@
+{
+    "file": "Pipe",
+    "dest": "../src/main/java/arachne/lib/pipeline",
+    "forms": [
+        {
+            "label": "Generic",
+            "filename": "Pipe",
+            "imports": [
+                "java.util.function.Predicate",
+                "java.util.function.UnaryOperator",
+                "",
+                "arachne.lib.io.Settable"
+            ],
+            "javadoc": {},
+            "variables": {
+                "ClassName": "Pipe",
+                "T": "T",
+                "Pipe": "Pipe<T>",
+                "Sink": "Sink<T>",
+                "Source": "Source<T>",
+                "Settable": "Settable<T>",
+                "Listener": "Listener<T>",
+                "Modifier": "UnaryOperator<T>",
+                "Filter": "Predicate<T>"
+            }
+        },
+        {
+            "label": "Boolean",
+            "filename": "BooleanPipe",
+            "imports": [
+                "arachne.lib.function.BooleanPredicate",
+                "arachne.lib.io.SettableBoolean"
+            ],
+            "javadoc": {},
+            "variables": {
+                "ClassName": "BooleanPipe",
+                "T": "boolean",
+                "Pipe": "BooleanPipe",
+                "Sink": "BooleanSink",
+                "Source": "BooleanSource",
+                "Settable": "SettableBoolean",
+                "Listener": "BooleanListener",
+                "Modifier": "BooleanPredicate",
+                "Filter": "BooleanPredicate"
+            }
+        },
+        {
+            "label": "Double",
+            "filename": "DoublePipe",
+            "imports": [
+                "java.util.function.DoublePredicate",
+                "java.util.function.DoubleUnaryOperator",
+                "",
+                "arachne.lib.io.SettableDouble"
+            ],
+            "javadoc": {},
+            "variables": {
+                "ClassName": "DoublePipe",
+                "T": "double",
+                "Pipe": "DoublePipe",
+                "Sink": "DoubleSink",
+                "Source": "DoubleSource",
+                "Settable": "SettableDouble",
+                "Listener": "DoubleListener",
+                "Modifier": "DoubleUnaryOperator",
+                "Filter": "DoublePredicate"
+            }
+        }
+    ]
+}

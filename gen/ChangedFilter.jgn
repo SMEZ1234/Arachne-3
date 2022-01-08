@@ -1,0 +1,26 @@
+package arachne.lib.pipeline.filters;
+
+#imports
+
+public class $ChangedFilter$ implements $Predicate$
+{
+	protected boolean isFirst;
+	protected $T$ lastValue;
+
+	public $ClassName$() {
+		this.isFirst = true;
+	}
+
+	@Override
+	public boolean test($T$ value) {
+		boolean result = $checkEquality$;
+		lastValue = value;
+
+		if(isFirst) {
+			isFirst = false;
+			return true;
+		}
+
+		return result;
+	}
+}

@@ -1,0 +1,83 @@
+{
+    "file": "Gettable",
+    "dest": "../src/main/java/arachne/lib/io",
+    "forms": [
+        {
+            "label": "Generic",
+            "filename": "Gettable",
+            "imports": [
+                "java.util.function.Predicate",
+                "java.util.function.Supplier",
+                "java.util.function.UnaryOperator"
+            ],
+            "javadoc": {},
+            "variables": {
+                "T": "T",
+                "Gettable": "Gettable<T>",
+                "ClassName": "Gettable",
+
+                "Supplier": "Supplier<T>",
+
+                "Predicate": "Predicate<T>",
+
+                "UnaryOperator": "UnaryOperator<T>",
+                "applyUnaryOperator": "apply",
+
+                "CreateParam": "<T> "
+            }
+        },
+        {
+            "label": "Double",
+            "filename": "GettableDouble",
+            "imports": [
+                "java.util.function.DoublePredicate",
+                "java.util.function.DoubleSupplier",
+                "java.util.function.DoubleUnaryOperator"
+            ],
+            "javadoc": {},
+            "variables": {
+                "T": "double",
+                "Gettable": "GettableDouble",
+                "ClassName": "GettableDouble",
+
+                "Supplier": "DoubleSupplier",
+                "supplierGet": "getAsDouble",
+
+                "Predicate": "DoublePredicate",
+
+                "UnaryOperator": "DoubleUnaryOperator",
+                "applyUnaryOperator": "applyAsDouble",
+
+                "CreateParam": ""
+            }
+        },
+        {
+            "label": "Boolean",
+            "filename": "GettableBoolean",
+            "imports": [
+                "java.util.function.BooleanSupplier",
+                "",
+                "arachne.lib.function.BooleanPredicate",
+                "arachne.lib.sequences.Actionable",
+                "arachne.lib.sequences.actions.Action",
+                "arachne.lib.sequences.actions.HostAction"
+            ],
+            "javadoc": {},
+            "variables": {
+                "T": "boolean",
+                "Gettable": "GettableBoolean",
+                "ClassName": "GettableBoolean",
+
+                "Supplier": "BooleanSupplier",
+                "supplierGet": "getAsBoolean",
+
+                "Predicate": "BooleanPredicate",
+
+                "UnaryOperator": "BooleanPredicate",
+                "applyUnaryOperator": "test",
+
+                "CreateParam": ""
+            }
+        }
+    ]
+}

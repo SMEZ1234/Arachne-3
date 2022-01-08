@@ -1,0 +1,37 @@
+package arachne.lib.io.sensors;
+
+#imports
+import arachne.lib.io.sensors.Input;
+import arachne.lib.logging.ArachneLogger;
+
+public final class $Input$ implements Input<$Sensor$>, $Sensor$ {
+	protected $Sensor$ sensor;
+
+	public void populate($Sensor$ sensor) {
+		this.sensor = sensor;
+	}
+
+	@Override
+	public $T$ get() {
+		if(sensor != null) return sensor.get();
+
+		ArachneLogger.getInstance().error("Tried to get $ClassName$ wrapper with no contained sensor, returning $nullValue$");
+		return $nullValue$;
+	}
+#if Settable
+
+	@Override
+	public void accept($T$ value) {
+		if(sensor != null) sensor.accept(value);
+		else ArachneLogger.getInstance().error("Tried to set $ClassName$ wrapper with no contained sensor");
+	}
+#endif
+#if Resettable Settable
+
+	@Override
+	public void reset() {
+		if(sensor != null) sensor.reset();
+		else ArachneLogger.getInstance().error("Tried to reset $ClassName$ wrapper with no contained sensor");
+	}
+#endif
+}

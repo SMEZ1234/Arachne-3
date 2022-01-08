@@ -1,0 +1,51 @@
+{
+    "file": "ChangedFilter",
+    "dest": "../src/main/java/arachne/lib/pipeline/filters",
+    "forms": [
+        {
+            "label": "Generic",
+            "filename": "ChangedFilter",
+            "imports": [
+                "java.util.function.Predicate"
+            ],
+            "javadoc": {},
+            "variables": {
+                "T": "T",
+                "ChangedFilter": "ChangedFilter<T>",
+                "ClassName": "ChangedFilter",
+                "Predicate": "Predicate<T>",
+                "checkEquality": "!value.equals(lastValue)"
+            }
+        },
+        {
+            "label": "Double",
+            "filename": "ChangedDoubleFilter",
+            "imports": [
+                "java.util.function.DoublePredicate"
+            ],
+            "javadoc": {},
+            "variables": {
+                "T": "double",
+                "ChangedFilter": "ChangedDoubleFilter",
+                "ClassName": "ChangedDoubleFilter",
+                "Predicate": "DoublePredicate",
+                "checkEquality": "value != lastValue"
+            }
+        },
+        {
+            "label": "Boolean",
+            "filename": "ChangedBooleanFilter",
+            "imports": [
+                "arachne.lib.function.BooleanPredicate"
+            ],
+            "javadoc": {},
+            "variables": {
+                "T": "boolean",
+                "ChangedFilter": "ChangedBooleanFilter",
+                "ClassName": "ChangedBooleanFilter",
+                "Predicate": "BooleanPredicate",
+                "checkEquality": "value != lastValue"
+            }
+        }
+    ]
+}

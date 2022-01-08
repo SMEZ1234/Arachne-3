@@ -1,0 +1,45 @@
+{
+    "file": "Settable",
+    "dest": "../src/main/java/arachne/lib/io",
+    "forms": [
+        {
+            "label": "Generic",
+            "filename": "Settable",
+            "imports": [
+                "java.util.function.Consumer"
+            ],
+            "javadoc": {},
+            "variables": {
+                "Settable": "Settable<T>",
+                "Consumer": "Consumer<T>",
+                "CreateParam": "<T> "
+            }
+        },
+        {
+            "label": "Boolean",
+            "filename": "SettableBoolean",
+            "imports": [
+                "arachne.lib.function.BooleanConsumer"
+            ],
+            "javadoc": {},
+            "variables": {
+                "Settable": "SettableBoolean",
+                "Consumer": "BooleanConsumer",
+                "CreateParam": ""
+            }
+        },
+        {
+            "label": "Double",
+            "filename": "SettableDouble",
+            "imports": [
+                "java.util.function.DoubleConsumer"
+            ],
+            "javadoc": {},
+            "variables": {
+                "Settable": "SettableDouble",
+                "Consumer": "DoubleConsumer",
+                "CreateParam": ""
+            }
+        }
+    ]
+}

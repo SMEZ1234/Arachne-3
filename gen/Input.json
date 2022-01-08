@@ -1,0 +1,82 @@
+{
+    "file": "Input",
+    "dest": "../src/main/java/arachne/lib/io/sensors",
+    "forms": [
+        {
+            "label": "GettableGeneric",
+            "filename": "GettableInput",
+            "imports": [
+                "arachne.lib.io.Gettable"
+            ],
+            "javadoc": {},
+            "variables": {
+                "Input": "GettableInput<T>",
+                "ClassName": "GettableInput",
+
+                "T": "T",
+                "Sensor": "Gettable<T>",
+                "nullValue": "null"
+            }
+        },
+        {
+            "label": "GettableBoolean",
+            "filename": "GettableBooleanInput",
+            "imports": [
+                "arachne.lib.io.GettableBoolean"
+            ],
+            "javadoc": {},
+            "variables": {
+                "Input": "GettableBooleanInput",
+                "ClassName": "GettableBooleanInput",
+
+                "T": "boolean",
+                "Sensor": "GettableBoolean",
+                "nullValue": "false"
+            }
+        },
+        {
+            "label": "GettableDouble",
+            "filename": "GettableDoubleInput",
+            "imports": [
+                "arachne.lib.io.GettableDouble"
+            ],
+            "javadoc": {},
+            "variables": {
+                "Input": "GettableDoubleInput",
+                "ClassName": "GettableDoubleInput",
+
+                "T": "double",
+                "Sensor": "GettableDouble",
+                "nullValue": "0"
+            }
+        },
+        {
+            "label": "Resettable",
+            "filename": "ResettableDoubleInput",
+            "imports": [],
+            "javadoc": {},
+            "variables": {
+                "Input": "ResettableDoubleInput",
+                "ClassName": "ResettableDoubleInput",
+
+                "T": "double",
+                "Sensor": "ResettableDoubleSensor",
+                "nullValue": "0"
+            }
+        },
+        {
+            "label": "Settable",
+            "filename": "SettableDoubleInput",
+            "imports": [],
+            "javadoc": {},
+            "variables": {
+                "Input": "SettableDoubleInput",
+                "ClassName": "SettableDoubleInput",
+
+                "T": "double",
+                "Sensor": "SettableDoubleSensor",
+                "nullValue": "0"
+            }
+        }
+    ]
+}

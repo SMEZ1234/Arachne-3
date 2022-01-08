@@ -1,0 +1,103 @@
+{
+    "file": "Source",
+    "dest": "../src/main/java/arachne/lib/pipeline",
+    "forms": [
+        {
+            "label": "Generic",
+            "filename": "Source",
+            "imports": [
+                "java.util.function.BiPredicate",
+                "java.util.function.Function",
+                "java.util.function.Predicate",
+                "java.util.function.ToDoubleFunction",
+                "",
+                "arachne.lib.io.Gettable",
+                "arachne.lib.io.Settable",
+                "arachne.lib.pipeline.translators.ToBooleanTranslator",
+                "arachne.lib.pipeline.translators.ToDoubleTranslator",
+                "arachne.lib.pipeline.translators.Translator"
+            ],
+            "javadoc": {},
+            "variables": {
+                "T": "T",
+                "Source": "Source<T>",
+
+                "Gettable": "Gettable<T>",
+                "Settable": "Settable<T>",
+                "Listener": "Listener<T>",
+
+                "ToGenericFunction": "Function<T, U>",
+                "ToGenericTranslator": "Translator<T, U>",
+
+                "ToDoubleFunction": "ToDoubleFunction<T>",
+                "ToDoubleTranslator": "ToDoubleTranslator<T>",
+
+                "Predicate": "Predicate<T>",
+                "BiPredicate": "BiPredicate<T, T>",
+                "ToBooleanTranslator": "ToBooleanTranslator<T>"
+            }
+        },
+        {
+            "label": "Boolean",
+            "filename": "BooleanSource",
+            "imports": [
+                "arachne.lib.function.BooleanBiPredicate",
+                "arachne.lib.function.BooleanFunction",
+                "arachne.lib.function.BooleanPredicate",
+                "arachne.lib.function.BooleanToDoubleFunction",
+                "arachne.lib.io.GettableBoolean",
+                "arachne.lib.io.SettableBoolean",
+                "arachne.lib.pipeline.translators.BooleanToDoubleTranslator",
+                "arachne.lib.pipeline.translators.FromBooleanTranslator"
+            ],
+            "javadoc": {},
+            "variables": {
+                "T": "boolean",
+                "Source": "BooleanSource",
+
+                "Gettable": "GettableBoolean",
+                "Settable": "SettableBoolean",
+                "Listener": "BooleanListener",
+
+                "ToGenericFunction": "BooleanFunction<U>",
+                "ToGenericTranslator": "FromBooleanTranslator<U>",
+
+                "ToDoubleFunction": "BooleanToDoubleFunction",
+                "ToDoubleTranslator": "BooleanToDoubleTranslator",
+
+                "Predicate": "BooleanPredicate",
+                "BiPredicate": "BooleanBiPredicate"
+            }
+        },
+        {
+            "label": "Double",
+            "filename": "DoubleSource",
+            "imports": [
+                "java.util.function.DoubleFunction",
+                "java.util.function.DoublePredicate",
+                "",
+                "arachne.lib.function.DoubleBiPredicate",
+                "arachne.lib.io.GettableDouble",
+                "arachne.lib.io.SettableDouble",
+                "arachne.lib.pipeline.translators.DoubleToBooleanTranslator",
+                "arachne.lib.pipeline.translators.FromDoubleTranslator"
+            ],
+            "javadoc": {},
+            "variables": {
+                "T": "double",
+                "Source": "DoubleSource",
+
+                "Gettable": "GettableDouble",
+                "Settable": "SettableDouble",
+                "Listener": "DoubleListener",
+
+                "ToGenericFunction": "DoubleFunction<U>",
+                "ToGenericTranslator": "FromDoubleTranslator<U>",
+
+                "Predicate": "DoublePredicate",
+                "BiPredicate": "DoubleBiPredicate",
+                "ToBooleanTranslator": "DoubleToBooleanTranslator"
+            }
+        }
+    ]
+}

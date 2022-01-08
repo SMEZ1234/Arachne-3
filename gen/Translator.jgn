@@ -1,0 +1,49 @@
+package arachne.lib.pipeline.translators;
+
+#imports
+
+public class $Translator$ implements $SettableIn$, $Source$
+{
+	protected final $Pipe$ pipe;
+	protected final $Translation$ translation;
+
+	public $ClassName$($InputT$ initialInputValue, $Translation$ translation) {
+		this.pipe = new $Pipe$(translation.$applyTranslation$(initialInputValue));
+		this.translation = translation;
+	}
+
+	@Override
+	public void accept($InputT$ value) {
+		pipe.accept(translation.$applyTranslation$(value));
+	}
+
+	@Override
+	public $OutputT$ get() {
+		return pipe.get();
+	}
+
+	@Override
+	public <SettableT extends $SettableOut$> SettableT attach(SettableT settable) {
+		return pipe.attach(settable);
+	}
+
+	@Override
+	public <ListenerT extends $Listener$> ListenerT attachListener(ListenerT listener) {
+		return pipe.attachListener(listener);
+	}
+
+	@Override
+	public boolean detach($SettableOut$ settable) {
+		return pipe.detach(settable);
+	}
+
+	@Override
+	public boolean detachListener($Listener$ listener) {
+		return pipe.detachListener(listener);
+	}
+
+	@Override
+	public void detachAll() {
+		pipe.detachAll();
+	}
+}

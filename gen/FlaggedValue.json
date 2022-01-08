@@ -1,0 +1,39 @@
+{
+    "file": "FlaggedValue",
+    "dest": "../src/main/java/arachne/lib/immutables",
+    "forms": [
+        {
+            "label": "Generic",
+            "filename": "FlaggedValue",
+            "imports": [],
+            "javadoc": {},
+            "variables": {
+                "T": "T",
+                "FlaggedValue": "FlaggedValue<T>",
+                "ClassName": "FlaggedValue"
+            }
+        },
+        {
+            "label": "Boolean",
+            "filename": "FlaggedBooleanValue",
+            "imports": [],
+            "javadoc": {},
+            "variables": {
+                "T": "boolean",
+                "FlaggedValue": "FlaggedBooleanValue",
+                "ClassName": "FlaggedBooleanValue"
+            }
+        },
+        {
+            "label": "Double",
+            "filename": "FlaggedDoubleValue",
+            "imports": [],
+            "javadoc": {},
+            "variables": {
+                "T": "double",
+                "FlaggedValue": "FlaggedDoubleValue",
+                "ClassName": "FlaggedDoubleValue"
+            }
+        }
+    ]
+}
